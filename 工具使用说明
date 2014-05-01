@@ -1,0 +1,68 @@
+一、FastQC
+		1. FastQ文件格式
+				FASTQ文件是一种FastQ序列文件，文本格式，包含生物序列（通常是核苷酸序列）信息以及此信息的质量分数。
+				FASTQ包含两种：fastq-sanger和fastq-illumina，两者基本相同，fastq-sanger更为通用标准。
+
+				FASTQ是基于文本的，保存生物序列（通常是核酸序列）和其测序质量信息的标准格式。其序列以及质量信息都是使用一个ASCII字符标示，最初由Sanger开发，目的是将FASTA序列与质量数据放到一起，目前已经成为高通量测序结果的事实标准。
+				格式说明
+
+				FASTQ文件中每个序列通常有四行：
+
+						第一行是序列标识以及相关的描述信息，以‘@’开头；
+						第二行是序列
+						第三行以‘+’开头，后面是序列标示符、描述信息，或者什么也不加
+						第四行，是质量信息，和第二行的序列相对应，每一个序列都有一个质量评分，根据评分体系的不同，每个字符的含义表示的数字也不相同。
+
+				例如：
+						@SEQ_ID
+						GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
+						+
+						!''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
+
+
+
+
+		2. FastQC程序
+				为每一个FastQ文件进行一系列检测。
+				1) fastqc下载解压后即可运行
+				2) fastqc有两种运行方式，一种是图形界面，用户可自行选择文件来检测；
+							另一种是在命令行中指定文件，批处理检测，并为每一个文件生成一个html格式的结果文件。通常提供一个zip包结果集，也提供一个解压后的文件夹。
+				3) fastqc --help可以看到更多的使用帮助信息
+				4) --outdir选项可用于指定一个独立的文件夹作为结果集输出地。
+				5) FastQC用于对一个FastQ文件进行一系列测试并产生一个综合报告。
+	
+				6) 如果希望将fastqc放入到一个pipeline中，可能需要对输出结果进行改进，加入自己的品牌。在Templates目录下有个header_template.html文件用于配置输出文件格式。这个文件包含了所有的report文件头，包括CSS section。
+				
+				
+二、NGStoolkit（下一代测序数据质量控制工具包）
+		用于进行质量检查和高质量数据的过滤，输出结果以表格或图形的方式表现。并且包含少量协助分析的工具。					
+		主要分为四种工具：
+		1. QC
+				1）IlluQC.pl:用于Illumina平台产生的FASTQ数据的QC检测和过滤；
+				2）IlluQC_PRLL.pl:功能同上，但它能使用多CPU同时检测；
+				3）454QC.pl: 用于454平台产生的FASTA数据的QC检测；
+				4）454QC_PRLL.pl: 也是454QC加多CPU；
+				5）454QC_PE.pl:
+				
+		2. Format-converter
+				1)SangerFastqToIlluFastq.pl:
+				2)SolexaFastqToIlluFastq.pl:
+				3)FastqTo454.pl:
+				4)FastqToFasta.pl:
+
+		3. Trimming(修剪) 包括过滤
+		
+		4. Statistics（统计）
+				1）AvgQuality.pl:	计算每次read的平均质量分数以及所有给定FASTA文件的总的质量分数
+				2）N50Stat.pl:		对FASTA格式的read/sequence数据进行统计
+
+
+
+		
+				
+				
+				
+				
+				
+				
+				
